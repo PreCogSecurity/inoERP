@@ -99,7 +99,7 @@ class PHPMailerTest extends PHPUnit_Framework_TestCase
         $this->Mail->Helo = 'localhost.localdomain';
         $this->Mail->SMTPAuth = false;
         $this->Mail->Username = '';
-        $this->Mail->Password = '';
+        $this->Mail->Password = getenv('SMTP_TEST_PASSWORD') ?: '';
         $this->Mail->PluginDir = $this->INCLUDE_DIR;
         $this->Mail->addReplyTo('no_reply@phpmailer.example.com', 'Reply Guy');
         $this->Mail->Sender = 'unit_test@phpmailer.example.com';
@@ -1400,7 +1400,7 @@ EOT;
             "private_key_bits" => 2048,
             "private_key_type" => OPENSSL_KEYTYPE_RSA,
         );
-        $password = 'password';
+        $password = getenv('SMTP_TEST_PASSWORD') ?: 'testpass';
         $certfile = 'certfile.txt';
         $keyfile = 'keyfile.txt';
 
@@ -1466,7 +1466,7 @@ EOT;
             "private_key_bits" => 2048,
             "private_key_type" => OPENSSL_KEYTYPE_RSA,
         );
-        $password = 'password';
+        $password = getenv('SMTP_TEST_PASSWORD') ?: 'testpass';
         $cacertfile = 'cacertfile.pem';
         $cakeyfile = 'cakeyfile.pem';
         $certfile = 'certfile.pem';

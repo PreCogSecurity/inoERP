@@ -1,7 +1,6 @@
 <?php
-include_once("../../../includes/basics/basics.inc");
-include("../../../tparty/mpdf/mpdf.php");
-$mpdf = new mPDF('c');
+require_once __DIR__ . '/../../../vendor/autoload.php';
+$mpdf = new \Mpdf\Mpdf();
 ob_start();
 global $si;
 echo '<link href="../../../themes/default/layout.css"  media="all" rel="stylesheet" type="text/css" />';
