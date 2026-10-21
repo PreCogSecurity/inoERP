@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    image: php:7.4-apache
+    container_name: inoerp_app
+    working_dir: /var/www/html
+    volumes:
+      - ./inoerp:/var/www/html
+      - ./ .htaccess:/var/www/html/.htaccess
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=inoerp
+      - DB_USER=inoerp
+      - DB_PASSWORD=inoerp
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: inoerp_mysql
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=inoerp
+      - MYSQL_USER=inoerp
+      - MYSQL_PASSWORD=inoerp
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+    driver: local
